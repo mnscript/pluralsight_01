@@ -1,14 +1,19 @@
-// var number = 5;
-// let name = "Name ";
-// number = 12;
-//
-// document.writeln(name + number);
-// alert("Hello World!");
+//DEPENDENCIES
+import Contact from "./Contact.js";
 
 // CONSTANTS
-const formInfo = document.getElementById("formInfo");
 const contactForm = document.getElementById("contactForm");
+const formInfo = document.getElementById("formInfo");
 const experiences = document.getElementsByClassName("experience");
+
+// FUNCTIONS
+function showMessage (msg) {
+  formInfo.innerHTML = "<p>" + msg + "</p>";
+}
+
+function clearMessage () {
+  formInfo.innerHTML = "";
+}
 
 // LOGIC
 let hasJob = true;
@@ -28,28 +33,16 @@ if (dayOfWeek === 0 || dayOfWeek === 6){
 
 contactForm.addEventListener("submit", function (event) {
     event.preventDefault();
-    showMessage ("Sending message...");
+    const contact = new Contact(contactForm);
+    contact.send();
 });
 
 for (let x = 0; x < experiences.length; x++) {
   const item = experiences[x];
   item.addEventListener("mouseenter", function (event) {
-    event.target.style = "background-color: #ededfe;";
+    event.target.style = "background-color: #ededf5;";
   });
   item.addEventListener("mouseleave", function (event) {
     event.target.style = "";
   });
-}
-
-// FUNCTIONS
-function showMessage (msg) {
-  formInfo.innerHTML = "<p>" + msg + "</p>";
-}
-
-function clearMessage () {
-  formInfo.innerHTML = "";
-}
-
-function sendMessage () {
-  showMessage ("Please wait. Sending your email.  ");
 }
